@@ -1,26 +1,10 @@
-import com.android.build.api.variant.BuildConfigField
-import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
-
 plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.jetbrainsKotlinAndroid)
-    alias(libs.plugins.googleDaggerhilt)
-    alias(libs.plugins.googleDevtoolsKsp)
-}
-
-androidComponents {
-    onVariants {
-        it.buildConfigFields.put(
-            "api_key", BuildConfigField(type = "String", value = gradleLocalProperties(rootDir, providers).getProperty("api_key"), comment = null)
-        )
-        it.buildConfigFields.put(
-            "base_url", BuildConfigField(type = "String", value = gradleLocalProperties(rootDir, providers).getProperty("base_url"), comment = null)
-        )
-    }
 }
 
 android {
-    namespace = "com.hevadevelop.domain"
+    namespace = "com.hevadevelop.common"
     compileSdk = 34
 
     defaultConfig {
@@ -46,14 +30,9 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
-    buildFeatures {
-        buildConfig = true
-    }
 }
 
 dependencies {
-    implementation(project(":common"))
-//    implementation(project(":data"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
@@ -61,11 +40,4 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-
-    implementation(libs.dagger.hilt)
-    ksp(libs.dagger.hilt.android.compiler)
-
-    implementation(libs.retrofit)
-    implementation(libs.converter.gson)
-    implementation(libs.logging.interceptor)
 }

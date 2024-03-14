@@ -11,6 +11,24 @@ composeBom = "2023.08.00"
 appcompat = "1.6.1"
 material = "1.10.0"
 
+google-dagger-hilt = "2.48"
+hilt-navigation-compose = "1.1.0"
+coil = "2.5.0"
+google-devtools-ksp = "1.9.0-1.0.12"
+timber = "5.0.1"
+jetbrains-serialization = "1.9.0"
+lottie-compose = "6.0.0"
+lifecycle-runtime-compose = "2.6.2"
+lifecycle-viewmodel-compose = "2.6.2"
+paging-compose-android = "3.3.0-alpha04"
+paging-runtime = "3.2.1"
+splitties-activities = "3.0.0"
+splitties-intents = "3.0.0"
+retrofit = "2.9.0"
+logging-interceptor = "4.9.0"
+constraintlayout-compose = "1.0.1"
+navigation-compose = "2.7.7"
+
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -29,8 +47,30 @@ androidx-material3 = { group = "androidx.compose.material3", name = "material3" 
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 
+coil = { group = "io.coil-kt", name = "coil-compose", version.ref = "coil" }
+dagger-hilt = { group = "com.google.dagger", name = "hilt-android", version.ref = "google-dagger-hilt" }
+dagger-hilt-android-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "google-dagger-hilt" }
+timber = { module = "com.jakewharton.timber:timber", version.ref = "timber" }
+lottie-compose = { module = "com.airbnb.android:lottie-compose", version.ref = "lottie-compose" }
+splitties-activities = { module = "com.louiscad.splitties:splitties-activities", version.ref = "splitties-activities" }
+splitties-intents = { module = "com.louiscad.splitties:splitties-intents", version.ref = "splitties-intents" }
+lifecycle-viewmodel-compose = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-compose", version.ref = "lifecycle-viewmodel-compose" }
+androidx-paging-common = { module = "androidx.paging:paging-common", version.ref = "paging-runtime" }
+androidx-paging-compose-android = { module = "androidx.paging:paging-compose-android", version.ref = "paging-compose-android" }
+androidx-paging-runtime = { module = "androidx.paging:paging-runtime", version.ref = "paging-runtime" }
+lifecycle-runtime-compose = { group = "androidx.lifecycle", name = "lifecycle-runtime-compose", version.ref = "lifecycle-runtime-compose" }
+logging-interceptor = { module = "com.squareup.okhttp3:logging-interceptor", version.ref = "logging-interceptor" }
+retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
+converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "retrofit" }
+androidx-constraintlayout-compose = { module = "androidx.constraintlayout:constraintlayout-compose", version.ref = "constraintlayout-compose" }
+androidx-hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "hilt-navigation-compose" }
+androidx-navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigation-compose" }
+
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
 jetbrainsKotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 androidLibrary = { id = "com.android.library", version.ref = "agp" }
 
+googleDevtoolsKsp = { id = "com.google.devtools.ksp", version.ref = "google-devtools-ksp" }
+googleDaggerhilt = { id = "com.google.dagger.hilt.android", version.ref = "google-dagger-hilt" }
+jetbrainsSerialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "jetbrains-serialization" }
