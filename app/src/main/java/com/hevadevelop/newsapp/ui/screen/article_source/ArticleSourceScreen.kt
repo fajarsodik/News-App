@@ -1,6 +1,5 @@
 package com.hevadevelop.newsapp.ui.screen.article_source
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -38,8 +37,6 @@ import androidx.navigation.NavHostController
 import androidx.paging.LoadState
 import androidx.paging.compose.collectAsLazyPagingItems
 import coil.compose.AsyncImage
-import coil.compose.AsyncImagePainter.State.Empty.painter
-import coil.compose.SubcomposeAsyncImage
 import com.hevadevelop.newsapp.R
 import timber.log.Timber
 import java.net.URLEncoder
@@ -72,7 +69,7 @@ fun ArticleSourceScreen(navController: NavHostController, source: String, source
         ) {
             LazyColumn {
                 items(count = news.itemCount) {
-                    val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'")
+                    val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssXXX")
                     val date: Date = try {
                         inputFormat.parse(news[it]!!.publishedAt)
                     } catch (e: ParseException) {

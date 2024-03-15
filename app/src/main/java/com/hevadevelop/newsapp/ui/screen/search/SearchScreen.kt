@@ -75,7 +75,7 @@ fun SearchScreen(navController: NavHostController) {
                         .weight(1f)
                 ) {
                     items(news.itemCount) {
-                        val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'")
+                        val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssXXX")
                         val date: Date = try {
                             inputFormat.parse(news[it]!!.publishedAt)
                         } catch (e: ParseException) {
