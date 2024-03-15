@@ -6,6 +6,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.hevadevelop.newsapp.ui.screen.article_source.ArticleSourceScreen
 import com.hevadevelop.newsapp.ui.screen.category_source.CategorySourceScreen
 import com.hevadevelop.newsapp.ui.screen.detail_news.DetailNewsScreen
 import com.hevadevelop.newsapp.ui.screen.main.MainScreen
@@ -29,7 +30,11 @@ fun NewsNavGraph() {
             val name = it.arguments?.getString("categories_name") ?: ""
             val slug = it.arguments?.getString("categories_slug") ?: ""
 //            NewsCategoriesScreen(name, slug, navController)
-            CategorySourceScreen(navController = navController, categoriesName = name, categoriesSlug = slug)
+            CategorySourceScreen(
+                navController = navController,
+                categoriesName = name,
+                categoriesSlug = slug
+            )
         }
         composable(
             route = "detail_news_screen/{url_news}",
@@ -42,6 +47,18 @@ fun NewsNavGraph() {
         }
         composable(route = "search_news") {
             SearchScreen(navController)
+        }
+        composable(
+            route = "article_source_screen/{source_name}/{source}",
+            arguments = listOf(navArgument("source_name") {
+                type = NavType.StringType
+            }, navArgument("source") {
+                type = NavType.StringType
+            })
+        ) {
+            val source_name = it.arguments?.getString("source_name") ?: ""
+            val source = it.arguments?.getString("source") ?: ""
+            ArticleSourceScreen(navController = navController, source = source, source_name = source_name)
         }
     }
 }

@@ -1,6 +1,5 @@
 package com.hevadevelop.newsapp.ui.screen.search
 
-import android.os.Build
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -28,6 +27,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -38,16 +38,13 @@ import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
 import coil.compose.AsyncImage
 import com.hevadevelop.domain.model.NewsResponse
+import com.hevadevelop.newsapp.R
 import com.hevadevelop.newsapp.ui.component.SearchBarWidget
 import timber.log.Timber
 import java.net.URLEncoder
 import java.nio.charset.StandardCharsets
 import java.text.ParseException
 import java.text.SimpleDateFormat
-import java.time.Instant
-import java.time.OffsetDateTime
-import java.time.ZoneOffset
-import java.time.format.DateTimeFormatter
 import java.util.Date
 
 
@@ -61,7 +58,7 @@ fun SearchScreen(navController: NavHostController) {
     Surface(modifier = Modifier.fillMaxSize()) {
         Column(
             modifier = Modifier.padding(8.dp)
-        ){
+        ) {
             SearchBarWidget(
                 query = query,
                 onQueryChanged = {
@@ -78,31 +75,6 @@ fun SearchScreen(navController: NavHostController) {
                         .weight(1f)
                 ) {
                     items(news.itemCount) {
-//                        val instant = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-//                            Instant.parse(news[it]!!.publishedAt)
-//                        } else {
-//                            // Parse the input string
-//
-//                            // Parse the input string
-//                            val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'")
-//                            val date: Date
-//                            date = try {
-//                                inputFormat.parse(news[it]!!.publishedAt)
-//                            } catch (e: ParseException) {
-//                                e.printStackTrace()
-//                                return
-//                            }
-//
-//                            // Format the date as "yyyy-MM-dd"
-//
-//                            // Format the date as "yyyy-MM-dd"
-//                            val outputFormat = SimpleDateFormat("yyyy-MM-dd")
-//                            val formattedDate: String = outputFormat.format(date)
-
-//                        }
-                        // Parse the input string
-
-                        // Parse the input string
                         val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'")
                         val date: Date = try {
                             inputFormat.parse(news[it]!!.publishedAt)
@@ -110,15 +82,8 @@ fun SearchScreen(navController: NavHostController) {
                             e.printStackTrace()
                             return@items
                         }
-
-                        // Format the date as "yyyy-MM-dd"
-
-                        // Format the date as "yyyy-MM-dd"
                         val outputFormat = SimpleDateFormat("yyyy-MM-dd")
                         val formattedDate: String = outputFormat.format(date)
-//                        val offsetDateTime = OffsetDateTime.ofInstant(instant, ZoneOffset.UTC)
-//                        val formattedDate =
-//                            offsetDateTime.format(DateTimeFormatter.ofPattern("EEEE, dd MMMM yyyy"))
                         val author = news[it]?.author
                         val title = news[it]?.title
                         val url_news = news[it]?.url
@@ -159,10 +124,12 @@ fun SearchScreen(navController: NavHostController) {
                                     model = news[it]?.urlToImage,
                                     contentDescription = "${news[it]?.description}",
                                     contentScale = ContentScale.Crop,
+                                    placeholder = painterResource(id = R.drawable.photo),
                                     modifier = Modifier
                                         .clip(CircleShape)
                                         .size(100.dp)
-                                        .weight(1f)
+                                        .weight(1f),
+                                    error = painterResource(id = R.drawable.error)
                                 )
                             }
                         }

@@ -10,10 +10,11 @@ import retrofit2.http.Query
 interface ApiService {
 
 
-    @GET("everything")
+    @GET("top-headlines")
     suspend fun newsArticles(
         @Header("Authorization") authorization: String,
         @Query("sources") sources: String,
+//        @Query("category") category: String,
         @Query("pageSize") pageSize: Int,
         @Query("page") page: Int,
     ): NewsResponse

@@ -19,16 +19,11 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
-import com.hevadevelop.domain.common.Resource
 import com.hevadevelop.domain.model.Categories
 import com.hevadevelop.newsapp.R
 import com.hevadevelop.newsapp.ui.component.WaveLayout
@@ -37,11 +32,6 @@ import timber.log.Timber
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MainScreen(navController: NavHostController) {
-    val mainViewModel = hiltViewModel<MainViewModel>()
-    val data = mainViewModel.articles.collectAsStateWithLifecycle()
-    LaunchedEffect(key1 = Unit) {
-        mainViewModel.getSourceByCategory("technology")
-    }
     Scaffold {
         Timber.d("")
         Column(
@@ -52,10 +42,11 @@ fun MainScreen(navController: NavHostController) {
         ) {
             WaveLayout(navController)
             Spacer(modifier = Modifier.height(2.dp))
-            Text(text = "News Categories", style = MaterialTheme.typography.bodyMedium, modifier = Modifier.padding(16.dp))
-//            if (data.value.articles.isNotEmpty()) {
-//                Text(text = "isinya gan ${data.value.articles}")
-//            }
+            Text(
+                text = "News Categories",
+                style = MaterialTheme.typography.bodyMedium,
+                modifier = Modifier.padding(16.dp)
+            )
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -89,9 +80,16 @@ fun MainScreen(navController: NavHostController) {
                                 verticalArrangement = Arrangement.Center,
                                 horizontalAlignment = Alignment.CenterHorizontally
                             ) {
-                                Image(painter = painterResource(id = allCategories[key].image), contentDescription = allCategories[key].name, modifier = Modifier.height(100.dp))
+                                Image(
+                                    painter = painterResource(id = allCategories[key].image),
+                                    contentDescription = allCategories[key].name,
+                                    modifier = Modifier.height(100.dp)
+                                )
                                 Spacer(modifier = Modifier.height(16.dp))
-                                Text(text = "${allCategories[key].name}", style = MaterialTheme.typography.titleMedium)
+                                Text(
+                                    text = "${allCategories[key].name}",
+                                    style = MaterialTheme.typography.titleMedium
+                                )
                             }
                         }
                     }
