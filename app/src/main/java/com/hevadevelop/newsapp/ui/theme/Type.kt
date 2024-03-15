@@ -19,7 +19,7 @@ val Typography = Typography(
             Font(R.font.poppins_medium, FontWeight.Medium),
             Font(R.font.poppins_semibold, FontWeight.SemiBold),
         ),
-        fontWeight = FontWeight.Normal,
+        fontWeight = FontWeight.Bold,
         fontSize = 21.sp,
         lineHeight = 24.sp,
         letterSpacing = 0.5.sp
@@ -33,7 +33,7 @@ val Typography = Typography(
             Font(R.font.poppins_medium, FontWeight.Medium),
             Font(R.font.poppins_semibold, FontWeight.SemiBold),
         ),
-        fontWeight = FontWeight.Medium,
+        fontWeight = FontWeight.Bold,
         fontSize = 16.sp,
         lineHeight = 24.sp,
         letterSpacing = 0.5.sp
@@ -61,7 +61,7 @@ val Typography = Typography(
             Font(R.font.poppins_medium, FontWeight.Medium),
             Font(R.font.poppins_semibold, FontWeight.SemiBold),
         ),
-        fontWeight = FontWeight.Medium,
+        fontWeight = FontWeight.Normal,
         fontSize = 14.sp,
         lineHeight = 24.sp,
         letterSpacing = 0.5.sp

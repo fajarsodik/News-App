@@ -19,22 +19,31 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
+import com.hevadevelop.domain.common.Resource
 import com.hevadevelop.domain.model.Categories
 import com.hevadevelop.newsapp.R
 import com.hevadevelop.newsapp.ui.component.WaveLayout
+import timber.log.Timber
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MainScreen(navController: NavHostController) {
-//    val mainViewModel = hiltViewModel<MainViewModel>()
-//    val data = mainViewModel.articles.collectAsState()
-//    Timber.d("testgan $data ${data.value} ${data.value.articles.size}")
+    val mainViewModel = hiltViewModel<MainViewModel>()
+    val data = mainViewModel.articles.collectAsStateWithLifecycle()
+    LaunchedEffect(key1 = Unit) {
+        mainViewModel.getSourceByCategory("technology")
+    }
     Scaffold {
+        Timber.d("")
         Column(
             modifier = Modifier
                 .padding(it)
@@ -44,6 +53,9 @@ fun MainScreen(navController: NavHostController) {
             WaveLayout(navController)
             Spacer(modifier = Modifier.height(2.dp))
             Text(text = "News Categories", style = MaterialTheme.typography.bodyMedium, modifier = Modifier.padding(16.dp))
+//            if (data.value.articles.isNotEmpty()) {
+//                Text(text = "isinya gan ${data.value.articles}")
+//            }
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -58,7 +70,7 @@ fun MainScreen(navController: NavHostController) {
                     ) { key ->
                         ElevatedCard(
                             onClick = {
-
+                                navController.navigate("news_categories_screen/${allCategories[key].name}/${allCategories[key].slug}")
                             }, modifier = Modifier
                                 .fillMaxWidth()
                                 .padding(horizontal = 16.dp, vertical = 8.dp),
@@ -71,7 +83,9 @@ fun MainScreen(navController: NavHostController) {
                         ) {
                             Spacer(modifier = Modifier.height(8.dp))
                             Column(
-                                modifier = Modifier.fillMaxSize().padding(6.dp),
+                                modifier = Modifier
+                                    .fillMaxSize()
+                                    .padding(6.dp),
                                 verticalArrangement = Arrangement.Center,
                                 horizontalAlignment = Alignment.CenterHorizontally
                             ) {

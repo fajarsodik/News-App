@@ -1,9 +1,10 @@
 package com.hevadevelop.domain.repository
 
+import androidx.compose.runtime.mutableStateOf
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import com.hevadevelop.domain.BuildConfig.api_key
-import com.hevadevelop.domain.model.NewsResponse
+import com.hevadevelop.domain.common.Resource
 import com.hevadevelop.domain.model.NewsSourcesResponse
 import com.hevadevelop.domain.network.ApiService
 import com.hevadevelop.domain.repository.paging.SearchNewsPagingSource
@@ -15,14 +16,25 @@ class NewsRepository @Inject constructor(private val api: ApiService) {
 
     private val _articleSource = MutableStateFlow(value = NewsSourcesResponse("", listOf()))
 
+    var isSuccess = mutableStateOf(false)
+
     val articleSource: StateFlow<NewsSourcesResponse>
         get() = _articleSource
 
-    suspend fun getSourcesNews() {
-        val result =  api.getNewsCategories(authorization = api_key, category = "general")
-        if (result.isSuccessful && result.body() != null) {
-            _articleSource.emit(result.body()!!)
+    suspend fun getSourcesNews(category: String): Resource<NewsSourcesResponse> {
+        val result = try {
+            api.getNewsCategories(authorization = api_key, category = category)
+        } catch (e: Exception) {
+            return Resource.Error(e.localizedMessage ?: "couldn't reach server")
         }
+
+//        if (result.isSuccessful && result.body() != null) {
+//            _articleSource.emit(result.body()!!)
+//        } else {
+//
+//        }
+        _articleSource.emit(result)
+        return Resource.Success(result)
     }
 
     fun searchNews(q: String) = Pager(

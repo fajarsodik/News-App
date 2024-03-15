@@ -31,6 +31,6 @@ interface ApiService {
     suspend fun getNewsCategories(
         @Header("Authorization") authorization: String,
         @Query("category") category: String,
-    ): Response<NewsSourcesResponse>
+    ): NewsSourcesResponse
 
 }

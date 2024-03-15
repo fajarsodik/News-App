@@ -6,6 +6,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.hevadevelop.newsapp.ui.screen.category_source.CategorySourceScreen
 import com.hevadevelop.newsapp.ui.screen.detail_news.DetailNewsScreen
 import com.hevadevelop.newsapp.ui.screen.main.MainScreen
 import com.hevadevelop.newsapp.ui.screen.search.SearchScreen
@@ -28,6 +29,7 @@ fun NewsNavGraph() {
             val name = it.arguments?.getString("categories_name") ?: ""
             val slug = it.arguments?.getString("categories_slug") ?: ""
 //            NewsCategoriesScreen(name, slug, navController)
+            CategorySourceScreen(navController = navController, categoriesName = name, categoriesSlug = slug)
         }
         composable(
             route = "detail_news_screen/{url_news}",
