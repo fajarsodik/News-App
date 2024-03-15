@@ -182,9 +182,9 @@ fun ArticleSourceScreen(navController: NavHostController, source: String, source
                         loadState.append is LoadState.Error -> {
                             val error = news.loadState.append as LoadState.Error
                             if (error.error.localizedMessage!! == "HTTP 426") {
-                                Timber.e("error from server $error")
+
                             } else if (error.endOfPaginationReached) {
-                                Timber.e("Finish pagination")
+
                             } else {
                                 item {
                                     Row(

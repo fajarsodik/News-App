@@ -6,7 +6,6 @@ plugins {
     alias(libs.plugins.jetbrainsKotlinAndroid)
     alias(libs.plugins.googleDevtoolsKsp)
     alias(libs.plugins.googleDaggerhilt)
-//    alias(libs.plugins.jetbrainsSerialization)
 }
 
 android {
@@ -58,8 +57,6 @@ android {
 
 dependencies {
 
-//    implementation(project(":data"))
-//    implementation(project(":common"))
     implementation(project(":domain"))
 
     implementation(libs.androidx.core.ktx)

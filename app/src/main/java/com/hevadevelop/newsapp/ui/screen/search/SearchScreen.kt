@@ -179,11 +179,11 @@ fun SearchScreen(navController: NavHostController) {
 
                         loadState.append is LoadState.Error -> {
                             val error = news.loadState.append as LoadState.Error
-//                            Timber.e("errornya di akhir: ${error.endOfPaginationReached} ${error.error} $error")
+
                             if (error.error.localizedMessage!! == "HTTP 426") {
-//                                Timber.e("error from server $error")
+
                             } else if (error.endOfPaginationReached) {
-//                                Timber.e("Finish pagination")
+
                             } else {
                                 Row(
                                     modifier = Modifier.padding(10.dp),

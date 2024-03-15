@@ -29,7 +29,6 @@ fun NewsNavGraph() {
         ) {
             val name = it.arguments?.getString("categories_name") ?: ""
             val slug = it.arguments?.getString("categories_slug") ?: ""
-//            NewsCategoriesScreen(name, slug, navController)
             CategorySourceScreen(
                 navController = navController,
                 categoriesName = name,
