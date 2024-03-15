@@ -52,7 +52,7 @@ android {
 }
 
 dependencies {
-    implementation(project(":common"))
+//    implementation(project(":common"))
 //    implementation(project(":data"))
 
     implementation(libs.androidx.core.ktx)
@@ -68,4 +68,9 @@ dependencies {
     implementation(libs.retrofit)
     implementation(libs.converter.gson)
     implementation(libs.logging.interceptor)
+
+    //paging compose
+    implementation(libs.androidx.paging.runtime)
+    testImplementation(libs.androidx.paging.common)
+    implementation(libs.androidx.paging.compose.android)
 }

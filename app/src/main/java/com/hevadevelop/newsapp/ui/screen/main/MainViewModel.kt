@@ -21,4 +21,6 @@ class MainViewModel @Inject constructor(private val newsRepository: NewsReposito
             newsRepository.getSourcesNews()
         }
     }
+
+
 }

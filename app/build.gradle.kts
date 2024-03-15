@@ -58,7 +58,7 @@ android {
 
 dependencies {
 
-    implementation(project(":data"))
+//    implementation(project(":data"))
 //    implementation(project(":common"))
     implementation(project(":domain"))
 
@@ -86,6 +86,7 @@ dependencies {
     implementation(libs.androidx.constraintlayout.compose)
 
     implementation(libs.lifecycle.viewmodel.compose)
+    implementation(libs.lifecycle.runtime.compose)
 
     implementation(libs.androidx.hilt.navigation.compose)
     implementation(libs.androidx.navigation.compose)
@@ -97,4 +98,9 @@ dependencies {
     implementation(libs.retrofit)
     implementation(libs.converter.gson)
     implementation(libs.logging.interceptor)
+
+    //paging compose
+    implementation(libs.androidx.paging.runtime)
+    testImplementation(libs.androidx.paging.common)
+    implementation(libs.androidx.paging.compose.android)
 }

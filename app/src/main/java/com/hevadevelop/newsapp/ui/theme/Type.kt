@@ -51,6 +51,20 @@ val Typography = Typography(
         fontSize = 12.sp,
         lineHeight = 24.sp,
         letterSpacing = 0.5.sp
+    ),
+    titleMedium = TextStyle(
+        fontFamily = FontFamily(
+            Font(R.font.poppins_light, FontWeight.Light),
+            Font(R.font.poppins_bold, FontWeight.Bold),
+            Font(R.font.poppins_extrabold, FontWeight.ExtraBold),
+            Font(R.font.poppins_regular, FontWeight.Normal),
+            Font(R.font.poppins_medium, FontWeight.Medium),
+            Font(R.font.poppins_semibold, FontWeight.SemiBold),
+        ),
+        fontWeight = FontWeight.Medium,
+        fontSize = 14.sp,
+        lineHeight = 24.sp,
+        letterSpacing = 0.5.sp
     )
     /* Other default text styles to override
     titleLarge = TextStyle(

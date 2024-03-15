@@ -1,5 +1,7 @@
 package com.hevadevelop.newsapp.ui.screen.main
 
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -17,27 +19,21 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import androidx.constraintlayout.compose.ConstraintLayout
-import androidx.constraintlayout.compose.Dimension
-import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavHostController
 import com.hevadevelop.domain.model.Categories
 import com.hevadevelop.newsapp.R
 import com.hevadevelop.newsapp.ui.component.WaveLayout
-import timber.log.Timber
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MainScreen() {
-    Timber.d("testkannnnn")
-    val mainViewModel = hiltViewModel<MainViewModel>()
-    val data = mainViewModel.articles.collectAsState()
-//    Log.d("testong", "hasilnyaa $data ${data.value}}")
-    Timber.d("testgan $data ${data.value} ${data.value.articles.size}")
+fun MainScreen(navController: NavHostController) {
+//    val mainViewModel = hiltViewModel<MainViewModel>()
+//    val data = mainViewModel.articles.collectAsState()
+//    Timber.d("testgan $data ${data.value} ${data.value.articles.size}")
     Scaffold {
         Column(
             modifier = Modifier
@@ -45,47 +41,9 @@ fun MainScreen() {
                 .fillMaxSize()
                 .verticalScroll(state = rememberScrollState())
         ) {
-            WaveLayout()
+            WaveLayout(navController)
             Spacer(modifier = Modifier.height(2.dp))
-            ElevatedCard(
-                onClick = {
-//                    navController.navigate("daftar_hotline_screen")
-                }, modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(16.dp),
-                elevation = CardDefaults.cardElevation(
-                    defaultElevation = 6.dp
-                ),
-                colors = CardDefaults.cardColors(
-                    containerColor = MaterialTheme.colorScheme.background
-                )
-            ) {
-//                Log.d("data", "datanya ${allCategories}")
-                Spacer(modifier = Modifier.height(8.dp))
-                ConstraintLayout(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(horizontal = 12.dp)
-                ) {
-                    val (textDescription, icon) = createRefs()
-                    Text(
-                        text = "description",
-                        overflow = TextOverflow.Ellipsis,
-                        modifier = Modifier.constrainAs(textDescription) {
-                            start.linkTo(parent.start)
-                            width = Dimension.fillToConstraints
-                        }
-                    )
-                    Text(
-                        text = "description",
-                        overflow = TextOverflow.Ellipsis,
-                        modifier = Modifier.constrainAs(icon) {
-                            end.linkTo(parent.end)
-                            width = Dimension.wrapContent
-                        }
-                    )
-                }
-            }
+            Text(text = "News Categories", style = MaterialTheme.typography.bodyMedium, modifier = Modifier.padding(16.dp))
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -93,14 +51,17 @@ fun MainScreen() {
             ) {
                 LazyVerticalGrid(columns = GridCells.Fixed(2)) {
                     items(
-                        data.value.articles.size
-                    ) { article ->
+                        count = allCategories.size,
+                        key = { index ->
+                            allCategories[index].slug
+                        }
+                    ) { key ->
                         ElevatedCard(
                             onClick = {
 
                             }, modifier = Modifier
                                 .fillMaxWidth()
-                                .padding(16.dp),
+                                .padding(horizontal = 16.dp, vertical = 8.dp),
                             elevation = CardDefaults.cardElevation(
                                 defaultElevation = 6.dp
                             ),
@@ -109,33 +70,20 @@ fun MainScreen() {
                             )
                         ) {
                             Spacer(modifier = Modifier.height(8.dp))
-                            ConstraintLayout(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .padding(horizontal = 12.dp)
+                            Column(
+                                modifier = Modifier.fillMaxSize().padding(6.dp),
+                                verticalArrangement = Arrangement.Center,
+                                horizontalAlignment = Alignment.CenterHorizontally
                             ) {
-                                val (textDescription, icon) = createRefs()
-//                                Text(
-//                                    text = "${data.value.articles[article].id}",
-//                                    overflow = TextOverflow.Ellipsis,
-//                                    modifier = Modifier.constrainAs(textDescription) {
-//                                        start.linkTo(parent.start)
-//                                        width = Dimension.fillToConstraints
-//                                    }
-//                                )
-                                Text(
-                                    text = "${data.value.articles[article].name}",
-                                    overflow = TextOverflow.Ellipsis,
-                                    modifier = Modifier.constrainAs(icon) {
-                                        end.linkTo(parent.end)
-                                        width = Dimension.wrapContent
-                                    }
-                                )
+                                Image(painter = painterResource(id = allCategories[key].image), contentDescription = allCategories[key].name, modifier = Modifier.height(100.dp))
+                                Spacer(modifier = Modifier.height(16.dp))
+                                Text(text = "${allCategories[key].name}", style = MaterialTheme.typography.titleMedium)
                             }
                         }
                     }
                 }
             }
+            Spacer(modifier = Modifier.height(8.dp))
         }
     }
 }
